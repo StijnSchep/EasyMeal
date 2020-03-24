@@ -1,0 +1,26 @@
+﻿@model OrderedMealListViewModel
+
+<div class="order-manage-header">
+    <span>@Model.GetHeaderMessage()</span>
+    <span class="float-right">&euro;@String.Format("{0:0.00}",Model.TotalOrderPrice)</span>
+</div>
+
+<div class="order-manage-meal-list">
+    @if (Model.OrderedMeals == null || !Model.OrderedMeals.Any())
+    {
+        <h1 class="text-center lowered">Voor deze dag zijn geen maaltijden beschikbaar</h1>
+    } else
+    {
+        foreach(OrderedMeal orderedMeal in Model.OrderedMeals)
+        {
+            await Html.RenderPartialAsync("_SelectOrderedMealPartial", orderedMeal);
+        }
+    }
+
+</div>
+
+<div class="text-center">
+    <a class="btn btn-danger lowered"
+       asp-route-startDate="@Model.StartDate.ToString("yyyy-MM-dd")"
+       asp-action="EditOrder">Annuleren</a>
+</div>

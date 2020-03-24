@@ -1,0 +1,84 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
+
+body {
+    background-color: #f3f3f3;
+}
+
+.header-image{
+    height: 50px;
+}
+
+main {
+    padding-top: 50px;
+}
+
+.fixed-link {
+    color:black
+}
+
+.fixed-link:hover {
+    color:black;
+}
+
+.lower-margin {
+    margin-bottom: 50px;
+}
+
+.display-4 {
+    font-family: 'Amatic SC', cursive;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-family: 'Amatic SC', cursive;
+}
+
+.order-info-day {
+    font-size:25px;
+}
+
+.aligned-icon:hover{
+    cursor:pointer;
+    color:black;
+}
+
+.aligned-icon-left {
+    color:black;
+    position: absolute;
+    margin-top: 8px;
+    margin-left: -23px;
+}
+
+.aligned-icon-right {
+    color:black;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 3px;
+}
+
+.order-info-day-block {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0;
+    width: 13.8%;
+    background-color: white;
+    height: 100px;
+    padding-top:20px;
+    display: inline-block;
+}
+
+.order-info-day-block:hover {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.8),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0;
+    height: 105px;
+    cursor: pointer;
+}
+
+.next-order-message p {
+    margin: 0;
+}
+
+.next-order-message {
+    margin-top: 150px;
+}
+
+.highlighted {
+    background-color: #ebfaaf;
+}

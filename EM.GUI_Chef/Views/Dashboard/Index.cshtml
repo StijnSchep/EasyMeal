@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Mijn Dashboard</h1>
+
+    <div class="row">
+        <div class="col-md-6 chefPadding">
+            <div class="chefNavItem">
+                <a asp-action="Dishes">
+                    <div class="imgContainer">
+                        <img src="~/img/DishImage.jpg" />
+                    </div>
+                    <h4>Mijn Gerechten</h4>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-6 chefPadding">
+            <div class="chefNavItem">
+                <a asp-action="WeekPlans" asp-controller="Weekplan">
+                    <div class="imgContainer">
+                        <img src="~/img/WeekplanImage.jpg" />
+                    </div>
+                    <h4>Mijn Weekplannen</h4>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>

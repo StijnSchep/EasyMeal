@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DishViewModel>
+
+
+<div class="dishHeader">
+    <a class="btn btn-info" asp-action="CreateDish">Gerecht aanmaken</a>
+</div>
+
+@if(!Model.Any())
+{
+    <h1 class="display-4 text-center no-dishes">Geen gerechten gevonden</h1>
+}
+
+
+@foreach (DishViewModel d in Model)
+{
+    <div class="DishContainer">
+        @if (d.Dish.Image == null)
+        {<img class="dishImg" src="~/img/NoImageAvailable.png" />}
+        else
+        { <img class="dishImg" src="data:image/jpg;base64,@Convert.ToBase64String(d.Dish.Image)" />}
+
+        <h6 class="dishName">@d.Dish.Name.ToUpper()</h6>
+        <h5 class="dishPrice">&euro;@d.Dish.Price</h5>
+
+        <hr />
+
+        <div class="dishCategories">
+            <p><b>Categorieën</b></p>
+            <ul>
+                @foreach (string s in d.Categories)
+                {
+                    <li>@s</li>
+                }
+            </ul>
+        </div>
+
+        <div class="dishDiet">
+            <p><b>Geschikt voor</b></p>
+            <ul>
+                @foreach (string s in d.DietaryRepresentation)
+                {
+                    <li>@s</li>
+                }
+            </ul>
+        </div>
+
+        <div class="options">
+            <a asp-action="EditDish" asp-route-dishId="@d.Dish.Id"><i class="material-icons">edit</i></a>
+            <a asp-action="DeleteDish" asp-route-dishId="@d.Dish.Id"><i class="material-icons">delete</i></a>
+        </div>
+
+
+    </div>
+}

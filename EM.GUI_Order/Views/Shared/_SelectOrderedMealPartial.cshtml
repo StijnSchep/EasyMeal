@@ -1,0 +1,86 @@
+﻿@model OrderedMeal
+
+<form asp-action="SetMeal" method="post">
+<div class="ordered-meal-selection-container">
+    <div class="ordered-meal-selection-upper row">
+        <div class="col-md-9 no-left-padding">
+            <div class="ordered-meal-name-bar">
+                <input type="checkbox" onclick="toggleDisplay(@Model.Meal.Id)"/>
+                <span>@Model.Meal.Name</span>
+
+                <span class="float-right" id="meal_price_@Model.Meal.Id">@Model.TotalPrice</span>
+                <span class="float-right">&euro;</span>
+            </div>
+
+            <ul class="meal-selection-dishlist">
+                <li><b>Voorgerecht</b>: @Model.Meal.Starter.Name</li>
+                <li><b>Hoofdgerecht</b>: @Model.Meal.Main.Name</li>
+                <li><b>Nagerecht</b>: @Model.Meal.Dessert.Name</li>
+            </ul>
+
+        </div>
+
+        <!-- Main Dish image -->
+        <div class="col-md-3 no-right-padding">
+            @if (Model.Meal.Main.Image == null)
+            {<img class="dishImg" src="~/img/NoImageAvailable.png" />}
+            else
+            { <img class="dishImg" src="data:image/jpg;base64,@Convert.ToBase64String(Model.Meal.Main.Image)" />}
+        </div>
+    </div>
+
+    <div class="ordered-meal-selection-lower" id="@Model.Meal.Id" style="display:none">
+        <div class="row">
+            <div class="col-md-4">
+                <span><b>Geschikt voor:</b></span>
+                <ul class="list-unstyled">
+                    @foreach (string s in Model.Meal.DietaryRepresentation)
+                    {
+                        <li>@s</li>
+                    }
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span><b>Opties:</b></span>
+                <div class="form-group meal-option-checkbox">
+                    <div class="checkbox">
+                        <label asp-for="IncludeStarter">
+                            <input asp-for="IncludeStarter" onclick="" />
+                            Inclusief voorgerecht
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group meal-option-checkbox">
+                    <div class="checkbox">
+                        <label asp-for="IncludeDessert">
+                            <input asp-for="IncludeDessert" />
+                            Inclusief nagerecht
+                        </label>
+                    </div>
+                </div>
+
+                <div class="text-center lowered">
+                    <input asp-for="@Model.MealId" hidden />
+                    <input asp-for="@Model.MealDate" value="@Model.MealDate.ToString("yyyy-MM-dd")" hidden />
+                    <button class="btn btn-secondary" type="submit">Maaltijd kiezen</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <span><b>Maaltijdgrootte:</b></span>
+                <ul class="list-unstyled">
+                    <li>"S": Small, 20% korting</li>
+                    <li>"M": Medium, normale prijs</li>
+                    <li>"L": Large, 20% duurder</li>
+                </ul>
+                <div class="form-group">
+                    <label asp-for="Size"></label>
+                    <input asp-for="Size" class="form-control" 
+                           id="meal_size_@Model.Meal.Id" 
+                           onchange="setMealPrice('meal_price_@Model.Meal.Id', @Model.Meal.GetTotalPrice(), 'meal_size_@Model.Meal.Id')"/>
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>

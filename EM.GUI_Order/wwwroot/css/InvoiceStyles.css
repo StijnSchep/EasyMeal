@@ -1,0 +1,17 @@
+﻿.invoice-header {
+    border-bottom: 1px solid #bbb;
+}
+
+.invoice-meal {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+
+.invoice-meal-list {
+    padding-bottom: 50px;
+}
+
+.invoice-conclusion {
+    border-top: 1px solid #bbb;
+    width: 20%;
+}

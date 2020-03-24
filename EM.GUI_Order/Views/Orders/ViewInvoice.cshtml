@@ -1,0 +1,46 @@
+﻿@model InvoiceViewModel
+
+<div class="invoice-header lower-margin">
+    <h1>Factuur voor @Model.CurrentMonth</h1>
+</div>
+
+<div class="invoice-meal-list">
+    @foreach (OrderedMeal oMeal in Model.OrderedMeals)
+    {
+        <div class="invoice-meal">
+            <span>@oMeal.MealDate.ToString("d MMM", (new CultureInfo("nl-NL")).DateTimeFormat) - </span>
+            <span>@oMeal.Meal.Name</span>
+            <span class="float-right">&euro;@oMeal.TotalPrice</span>
+        </div>
+    }
+</div>
+
+<div class="invoice-conclusion float-right">
+    <div>
+        <span>Subtotaal:</span>
+        <span class="float-right">&euro;@Model.CalculateSubtotal()</span>
+    </div>
+
+    <div>
+        @if (Model.BirthDateDiscount() > 0)
+        {
+            <span>Verjaardagskorting:</span>
+            <span class="float-right">&euro;@Model.BirthDateDiscount()</span>
+        }
+
+        @if (Model.HasPlusFifteenOrders())
+        {
+            <span>+15 maaltijden-korting:</span>
+            <span class="float-right">10% korting</span>
+        }
+
+        @if (!Model.HasPlusFifteenOrders() && Model.BirthDateDiscount() == 0)
+        {
+            <span>Geen korting</span>
+        }
+        <hr />
+        <span>Totaal:</span>
+        <span class="float-right">&euro;@Model.CalculateTotalPrice()</span>
+    </div>
+  
+</div>

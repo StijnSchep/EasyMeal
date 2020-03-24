@@ -1,0 +1,55 @@
+﻿@model WeekdayViewModel
+
+<h1 class="display-4">Maaltijden @Model.day.MealDate.ToString("d MMM", (new CultureInfo("nl-NL")).DateTimeFormat)</h1>
+
+<div class="weekplanHeader">
+    <a class="btn btn-warning " asp-action="CreateWeekplan" asp-route-dayIndex="@Model.dayIndex">Naar weekoverzicht</a>
+    <a class="btn btn-info float-right" asp-action="CreateMeal" asp-route-dayIndex="@Model.dayIndex">Maaltijd aanmaken</a>
+</div>
+
+@if(!Model.day.Meals.Any())
+{
+    <h1 class="display-4 text-center no-weekplans">Geen maaltijden gevonden</h1>
+}
+
+@for(int i = 0; i < Model.day.Meals.Count; i++)
+{
+<div class="DishContainer">
+    @if (Model.day.Meals.ElementAt(i).Main.Image == null)
+    {<img class="dishImg" src="~/img/NoImageAvailable.png" />}
+    else
+    { <img class="dishImg" src="data:image/jpg;base64,@Convert.ToBase64String(Model.day.Meals.ElementAt(i).Main.Image)" />}
+
+    <h6 class="dishName">@Model.day.Meals.ElementAt(i).Name.ToUpper()</h6>
+    <h5 class="dishPrice text-right">Maaltijdprijs: &euro;@Model.day.Meals.ElementAt(i).GetTotalPrice()</h5>
+
+    <div class="dishCategories">
+        <p><b>Gerechten</b></p>
+        <ul>
+            <li>Voorgerecht: @Model.day.Meals.ElementAt(i).Starter.Name</li>
+            <li>Hoofdgerecht: @Model.day.Meals.ElementAt(i).Main.Name</li>
+            <li>Nagerecht: @Model.day.Meals.ElementAt(i).Dessert.Name</li>
+        </ul>
+    </div>
+
+    <div class="dishDiet">
+        <p><b>Geschikt voor</b></p>
+        <ul>
+            @foreach (string s in Model.day.Meals.ElementAt(i).DietaryRepresentation)
+            {
+                <li>@s</li>
+            }
+        </ul>
+    </div>
+
+    <div class="options">
+        <a asp-action="EditMeal" 
+           asp-route-dayIndex="@Model.dayIndex"
+           asp-route-mealIndex="@i"
+           ><i class="material-icons">edit</i></a>
+        <a asp-action="DeleteMeal"
+           asp-route-dayIndex="@Model.dayIndex"
+           asp-route-mealIndex="@i"><i class="material-icons">delete</i></a>
+    </div>
+</div>
+}

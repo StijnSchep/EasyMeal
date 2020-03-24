@@ -1,0 +1,35 @@
+﻿@model MealDishViewModel
+
+<h1 class="display-4">Kies een @Model.dishCategory</h1>
+
+@foreach (DishViewModel d in Model.Dishes)
+{
+<a class="hover-item" 
+   asp-action="@Model.returnAction"
+   asp-route-dayIndex="@Model.dayIndex"
+   asp-route-mealIndex="@Model.mealIndex"
+   asp-route-dishId="@d.Dish.Id">
+
+    <div class="DishContainer">
+        @if (d.Dish.Image == null)
+        {<img class="dishImg" src="~/img/NoImageAvailable.png" />}
+        else
+        { <img class="dishImg" src="data:image/jpg;base64,@Convert.ToBase64String(d.Dish.Image)" />}
+
+        <h6 class="dishName">@d.Dish.Name.ToUpper()</h6>
+        <h5 class="dishPrice">&euro;@d.Dish.Price</h5>
+
+        <hr />
+
+        <div class="dishDiet">
+            <p><b>Geschikt voor</b></p>
+            <ul>
+                @foreach (string s in d.DietaryRepresentation)
+                {
+                    <li>@s</li>
+                }
+            </ul>
+        </div>
+    </div>
+</a>
+}

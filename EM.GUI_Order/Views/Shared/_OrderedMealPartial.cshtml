@@ -1,0 +1,67 @@
+﻿@model OrderedMealPartialViewHolder
+
+<div class="order-manage-meal">
+    <div class="order-manage-meal-header">
+        <span>@Model.MealDate.ToString("dddd, dd MMMM yyyy", (new CultureInfo("nl-NL")).DateTimeFormat)</span>
+    
+        @if(Model.OrderedMeal != null)
+        {
+            <a class="btn btn-info squeeze float-right"
+               asp-action="SelectMeal"
+               asp-route-mealDate="@Model.MealDate.ToString("MM-dd-yyyy")">Wijzigen</a>
+        }
+    </div>
+
+    @if(Model.OrderedMeal == null)
+    {
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="no-meal-selected">Geen maaltijd gekozen</h1>
+            </div>
+            <div class="col-md-5">
+                <a class="btn btn-secondary select-new-meal"
+                   asp-action="SelectMeal"
+                   asp-route-mealDate="@Model.MealDate.ToString("MM-dd-yyyy")">Maaltijd selecteren</a>
+            </div>
+        </div>
+        
+    } else {
+        <div class="row">
+
+            <div class="col-md-4">
+                @if (Model.OrderedMeal.Meal.Main.Image == null)
+                {<img class="dishImg" src="~/img/NoImageAvailable.png" />}
+                else
+                { <img class="dishImg" src="data:image/jpg;base64,@Convert.ToBase64String(Model.OrderedMeal.Meal.Main.Image)" />}
+            </div>
+
+            <div class="col-md-8">
+                <span><b>@Model.OrderedMeal.Meal.Name</b></span>
+                <span class="float-right">&euro;@String.Format("{0:0.00}",Model.OrderedMeal.TotalPrice)</span>
+            
+                <div class="row">
+                    <div class="col-md-6">
+                        <span style="font-size: 10px">Gerechten</span>
+                        <ul class="list-unstyled" style="font-size: 10px">
+                            <li>@Model.OrderedMeal.Meal.Starter.Name</li>
+                            <li>@Model.OrderedMeal.Meal.Main.Name</li>
+                            <li>@Model.OrderedMeal.Meal.Dessert.Name</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <span style="font-size: 10px">Opties</span>
+                        <ul class="list-unstyled" style="font-size: 10px">
+                            <li>Voorgerecht? @Model.OrderedMeal.IncludeStarter</li>
+                            <li>Nagerecht? @Model.OrderedMeal.IncludeDessert</li>
+                            <li>Grootte: @Model.OrderedMeal.Size</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>

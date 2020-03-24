@@ -1,0 +1,50 @@
+﻿@model OrderViewModel
+
+    <div>
+        <a class="btn btn-secondary" style="margin-left:80%"
+           asp-action="ViewInvoice"
+           >Factuur bekijken</a>
+    </div>
+
+<div class="text-center lower-margin">
+    <h1 class="display-4">Mijn Bestellingen</h1>
+    <a asp-action="OrderInfo"
+       asp-route-startDate="@Model.PreviousMonday.ToString("MM-dd-yyyy")"><i class="material-icons aligned-icon aligned-icon-left">arrow_left</i></a>
+    <span class="order-info-day">@Model.Order.StartDate.ToString("d MMM", (new CultureInfo("nl-NL")).DateTimeFormat) - </span>
+    <span class="order-info-day">@Model.EndDate.ToString("d MMM", (new CultureInfo("nl-NL")).DateTimeFormat)</span>
+    <a asp-action="OrderInfo"
+       asp-route-startDate="@Model.NextMonday.ToString("MM-dd-yyyy")"><i class="material-icons aligned-icon aligned-icon-right">arrow_right</i></a>
+</div>
+
+@foreach (DateTime date in Model.days)
+{
+<a class="fixed-link"
+   asp-action="DayDetails"
+   asp-route-startDate="@Model.Order.StartDate.ToString("MM-dd-yyyy")"
+   asp-route-mealDate="@date.ToString("MM-dd-yyyy")">
+
+    @if (Model.HasMealForDate(date))
+    {
+        <div class="order-info-day-block highlighted text-center">
+            <h1>@date.DayOfWeek.ToString()</h1>
+            <p><b>@date.ToString("d MMM", (new CultureInfo("nl-NL")).DateTimeFormat)</b></p>
+        </div>
+    }
+    else
+    {
+        <div class="order-info-day-block text-center">
+            <h1>@date.DayOfWeek.ToString()</h1>
+            <p><b>@date.ToString("d MMM", (new CultureInfo("nl-NL")).DateTimeFormat)</b></p>
+        </div>
+    }
+</a>
+}
+
+<div class="text-center next-order-message">
+    <p>Je kan nu een bestelling plaatsen voor volgende week</p>
+    <p>Doe dit voor donderdag @Model.TuesdayLimit.ToString("m", (new CultureInfo("nl-NL")).DateTimeFormat), 23:59</p>
+    <a class="btn btn-info"
+       asp-route-startDate="@Model.GetNewOrderStartDate().ToString("MM-dd-yyyy")"
+       asp-action="EditOrder"
+       >Bestelling aanmaken</a>
+</div>

@@ -1,0 +1,80 @@
+﻿@model DishViewModel
+@{ 
+    ViewBag.Title = "Gerecht Aanpassen";
+}
+
+    <form asp-action="EditDish" enctype="multipart/form-data" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="hidden" asp-for="Dish.Id" />
+                <div class="form-group">
+                    <label asp-for="Dish.Name">Naam</label>
+                    <div><span asp-validation-for="Dish.Name" class="text-danger"></span></div>
+                    <input asp-for="Dish.Name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Dish.Description">Beschrijving</label>
+                    <div><span asp-validation-for="Dish.Description" class="text-danger"></span></div>
+                    <textarea asp-for="Dish.Description" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Dish.Price">Prijs</label>
+                    <div><span asp-validation-for="Dish.Price" class="text-danger"></span></div>
+                    <input asp-for="Dish.Price" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Image">Afbeelding</label>
+                    <input asp-for="Image" class="form-control-file" accept="image/x-jpg">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Categorieën</b></label>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label asp-for="isStarter">
+                                    <input asp-for="isStarter" /> Voorgerecht
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label asp-for="isMain">
+                                    <input asp-for="isMain" /> Hoofdgerecht
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label asp-for="isDessert">
+                                    <input asp-for="isDessert" /> Nagerecht
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Geschikt voor</b></label>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label asp-for="salt">
+                                    <input asp-for="salt" /> Zoutloos
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label asp-for="diabetes">
+                                    <input asp-for="diabetes" /> Diabetus
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label asp-for="gluten">
+                                    <input asp-for="gluten" /> Glutenallergie
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Opslaan</button>
+            <a asp-action="Index" class="btn btn-secondary">Annuleren</a>
+        </div>
+    </form>

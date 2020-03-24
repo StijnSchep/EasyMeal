@@ -1,0 +1,21 @@
+﻿@model IEnumerable<WeekPlan>
+
+<div class="weekplanHeader">
+    <a class="btn btn-info text-right" asp-action="CreateWeekplan">Weekplan aanmaken</a>
+</div>
+
+@if (!Model.Any())
+{
+    <h1 class="display-4 text-center no-weekplans">Geen weekplannen gevonden</h1>
+}
+
+@foreach(WeekPlan plan in Model)
+{
+    <div class="weekplanHeader weekplanContainer">
+        <h1>Weekplan vanaf @plan.StartDate.ToString("d MMM", (new CultureInfo("nl-NL")).DateTimeFormat)</h1>
+        <div class="options">
+            <a asp-action="EditWeekplan" asp-route-weekplanId="@plan.Id"><i class="material-icons">edit</i></a>
+            <a asp-action="DeleteWeekplan" asp-route-weekplanId="@plan.Id"><i class="material-icons">delete</i></a>
+        </div>
+    </div>
+}

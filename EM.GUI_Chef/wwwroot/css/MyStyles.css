@@ -1,0 +1,56 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
+
+body {
+    background-color: #f3f3f3;
+}
+
+.header-image {
+    height: 50px;
+}
+
+.display-4 {
+    font-family: 'Amatic SC', cursive;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-family: 'Amatic SC', cursive;
+}
+
+.upper-margin {
+    margin-top: 10vh;
+}
+
+.imgContainer {
+    overflow: hidden;
+    width: 100%;
+    height: 180px;
+}
+
+.imgContainer img {
+    display: block;
+    width: 100%;
+}
+
+.chefPadding {
+    padding: 15px;
+}
+
+.chefNavItem {
+    box-shadow: 0 5px 10px #cccccc;
+    padding: 0;
+}
+
+.chefNavItem:hover {
+    box-shadow: 0 5px 10px #999;
+    cursor: pointer;
+}
+
+.chefNavItem h4 {
+    padding: 25px;
+}
+
+.chefNavItem a, .chefNavItem a:hover{
+    color: black;
+    text-decoration: none;
+}

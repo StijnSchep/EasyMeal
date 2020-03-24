@@ -1,0 +1,110 @@
+﻿.DishContainer {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0;
+    background-color: white;
+    display: grid;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 80%;
+
+    grid-template-columns: 25% auto auto 10%;
+    grid-template-rows: 10% auto 10%;
+    grid-template-areas: 
+        "img name price options"
+        "img l l l"
+        "img cat diet ."
+}
+
+.no-bottom-margin {
+    margin-bottom: 0;
+}
+
+.dish-message {
+    grid-area: l;
+}
+
+.no-dishes {
+    margin-top: 100px;
+}
+
+.dishImg {
+    width: 100%;
+    height: 100%;
+    grid-area: img
+}
+
+hr {
+    margin: 0; padding: 0;
+    background-color: #eeeeee;
+    width: 100%;
+    grid-area: l
+}
+
+.dishName {
+    margin: 15px 10px 10px 10px;
+    grid-area: name;
+}
+
+.dishPrice {
+    margin: 10px;
+    grid-area: price;
+    text-align: right;
+}
+
+.options {
+    padding: 10px;
+    text-align: right;
+    grid-area: options;
+}
+
+.options a {
+    margin: 5px;
+}
+
+.options a:hover i{
+    cursor: pointer;
+    color: blue;
+}
+
+.dishCategories {
+    grid-area: cat;
+    margin-left: 10px;
+}
+
+.dishCategories p {
+    margin: 0;
+    padding: 0;
+}
+
+.dishCategories ul {
+    list-style-type: none;
+}
+
+.dishDiet {
+    grid-area: diet;
+}
+
+.dishDiet ul {
+    list-style-type: none;
+}
+
+.dishDiet p {
+    margin: 0;
+    padding: 0;
+}
+
+.dishHeader {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0;
+    margin-bottom: 20px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: white;
+    text-align: right;
+}
+
+.dishHeader .btn-info:hover {
+    cursor: pointer;
+}
+
+
